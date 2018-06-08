@@ -65,13 +65,13 @@ class HashTable
 		}
 
 
-		bool retrieve(const KeyType & key_, const DataType & data_item_){
+		bool retrieve(const KeyType & key_,  DataType & data_item_) const{
 
 			
 			auto & whichList = Lists[ hashFunc(key_) % tablesize];
 			for (auto i = whichList.begin(); i != whichList.end(); ++i) {
-				if (true == equalFunc(i.m_key , key_)){
-					data_item_ = i.m_data;
+				if (true == equalFunc((*i).m_key , key_)){
+					data_item_ = (*i).m_data;
 					return true;
 				}
 			}
@@ -91,6 +91,22 @@ class HashTable
 				}
 
 			}
+		}
+
+		void clear()
+		{
+
+		Lists.clear();
+
+		}
+		
+		bool empty ( void ) const{
+		return currentSize == 0;
+		}
+
+
+		size_type count (void) const{
+			return currentSize;
 		}
 
 		bool remove(const KeyType & key_){
