@@ -6,7 +6,7 @@
 #include <math.h>
 #include <string>
 #include <vector>
-#include <list>
+#include <forward_list>
 #include <iterator>
 #include <iostream>
 using size_type = size_t;
@@ -48,15 +48,19 @@ class HashTable
 		
 			auto & whichList = Lists[ hashFunc(key_) % tablesize];
 			Entry new_entry (key_, data_item_ );
-
-			for (auto i = whichList.begin(); i != whichList.end(); ++i) {
-		//		std::cout << *i << std::endl;
-				if (true == equalFunc((*i).m_key , new_entry.m_key)){
+			auto itr = whichList.begin();
+			auto itr_b = whichList.before_begin();
+			auto end = whichList.end();
+			for (; itr != end; ++itr) {
+				
+				itr_b++;
+				if (true == equalFunc((*itr).m_key , new_entry.m_key)){
 					return false;
 				}
-			}	
+			}
 
-			whichList.push_back(new_entry);
+			whichList.insert_after(itr_b, new_entry);
+//			whichList.push_front(new_entry);
 
 				if(++currentSize > tablesize ) 
 					rehash( );
@@ -111,21 +115,22 @@ class HashTable
 
 		bool remove(const KeyType & key_){
 
-
 			auto & whichList = Lists[ hashFunc(key_) % tablesize];
+			auto itr_back = whichList.before_begin();
 			for (auto i = whichList.begin(); i != whichList.end(); ++i) {
 		//		std::cout << *i << std::endl;
 				if (true == equalFunc((*i).m_key , key_ )){
-					whichList.erase(i);
+					whichList.erase_after(itr_back);
 					return true;
 				}
+				itr_back++;
 			}	
 				return false;
 		}
 
 	private:
 
-		std::vector<std::list<HashEntry>> Lists; 
+		std::vector<std::forward_list<HashEntry>> Lists; 
 		
 		size_type currentSize;
 		size_type tablesize;
@@ -146,7 +151,7 @@ class HashTable
 		void rehash(){
 
 	//		std::cout << "calls to rehash " << std::endl;
-			std::vector<std::list<HashEntry>> oldLists = Lists;
+			std::vector<std::forward_list<HashEntry>> oldLists = Lists;
 			// Create new double-sized, empty table
 			tablesize =  next_prime( 2 * tablesize ); 
 			
