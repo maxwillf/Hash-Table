@@ -138,7 +138,7 @@ class HashTable{
 				return false;
 		}	
 
-	private:
+	public:
 
 		std::vector<std::forward_list<HashEntry>> Lists; 
 		

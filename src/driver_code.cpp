@@ -152,6 +152,7 @@ int main()
         contas.insert( accs[5].get_key(), accs[5] );
         contas.print();
 
+        std::cout<< contas.tablesize << "\n";
         //assert( contas.capacity() == 5 );
         assert( contas.count() == 6 );
     }
