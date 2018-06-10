@@ -22,8 +22,7 @@ template <typename KeyType,
 		  typename DataType,
 		  typename KeyHash = std::hash<KeyType> ,
 		  typename KeyEqual = std::equal_to<KeyType> >
-class HashTable
-{
+class HashTable{
 
 	class HashEntry{
 
@@ -43,7 +42,7 @@ class HashTable
 
 		using Entry = HashEntry;
 
-		HashTable(void): tablesize(101),currentSize(0), { Lists.resize(101);}
+		HashTable(void): tablesize(101),currentSize(0){ Lists.resize(101);}
 
 
 		explicit HashTable(size_type size): tablesize(next_prime(size)), currentSize(0)
@@ -104,15 +103,13 @@ class HashTable
 			}
 		}
 
-		void clear()
-		{
+		void clear(){
 
-		Lists.clear();
-
+			Lists.clear();
 		}
 		
 		bool empty ( void ) const{
-		return currentSize == 0;
+			return currentSize == 0;
 		}
 
 
@@ -135,17 +132,6 @@ class HashTable
 				return false;
 		}
 
-	private:
-
-		std::vector<std::forward_list<HashEntry>> Lists; 
-		
-		size_type currentSize;
-		size_type tablesize;
-	
-		// auxiliary functions
-		KeyHash hashFunc;
-		KeyEqual equalFunc;
-		
 		size_type next_prime(size_type number){
 
 			for (int i = 2; i < sqrt(number); ++i) {
@@ -175,7 +161,18 @@ class HashTable
 			for( auto & copyLists : oldLists )
 				for( auto & x : copyLists )
 					insert(x.m_key, x.m_data);
-		}
+		}		
+
+	private:
+
+		std::vector<std::forward_list<HashEntry>> Lists; 
+		
+		size_type currentSize;
+		size_type tablesize;
+	
+		// auxiliary functions
+		KeyHash hashFunc;
+		KeyEqual equalFunc;
 };
 
 #endif

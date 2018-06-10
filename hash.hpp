@@ -43,7 +43,7 @@ class HashTable
 
 		using Entry = HashEntry;
 
-		HashTable(void): tablesize(101),currentSize(0), { Lists.resize(101);}
+		HashTable(void): tablesize(101),currentSize(0) { Lists.resize(101);}
 
 
 		explicit HashTable(size_type size): tablesize(next_prime(size)), currentSize(0)
@@ -144,8 +144,10 @@ class HashTable
 	
 		// auxiliary functions
 		KeyHash hashFunc;
-		KeyEqual equalFunc;
-		
+		//KeyEqual equalFunc;
+		bool operator()( const Account::AcctKey & _lhs, const Account::AcctKey & _rhs ) const;
+
+	public:
 		size_type next_prime(size_type number){
 
 			for (int i = 2; i < sqrt(number); ++i) {

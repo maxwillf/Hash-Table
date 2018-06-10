@@ -47,7 +47,7 @@ struct Account{
             " >\n\tBank: < "   << _acc.bank_code <<
             " >\n\tBranch: < " << _acc.branch_code <<
             " >\n\tNumber: < " << _acc.acc_number <<
-            " >\n\tBalance: < " << _acc balance << " >\n";
+            " >\n\tBalance: < " << _acc.balance << " >\n";
         return _os;
     }
 };
@@ -57,10 +57,9 @@ struct KeyHash
 {
     std::size_t operator()( const Account::AcctKey & k_ ) const
     {
-        // This is just to debug.
         std::cout << "\n\t>>> [KeyHash()]: key = " << std::hash< int >()( k_ ) << std::endl;
-        // Calcular o valore de dispersao.
-        return std::hash< int >()( k_ );
+        // Calculates a Hash value
+        return std::hash< int >()( k_ ); // This part we can change
     }
 };
 
@@ -90,7 +89,7 @@ int main()
             };
 
         // Hash tablee with capacity = 23
-    	HashTbl< Account::AcctKey, Account > contas(21);
+    	HashTable< Account::AcctKey, Account > contas(21);
 
         assert( contas.capacity() == 23 );
         assert( contas.count() == 0 );
@@ -132,20 +131,14 @@ int main()
     }
 
 /*------------------------- Prime Numbers Testing ---------------------------*/ 
-    {
+    /*{
         std::cout << "                                              Testing Prime Numbers..." << "                                             \n";
 
-        assert( is_prime(13) );
-        assert( is_prime(37) );
-        assert( is_prime(59) );
-        assert( is_prime(67) );
-        assert( is_prime(83) );
-        assert( is_prime(97) );
         assert( next_prime(9)  == 11 );
         assert( next_prime(55) == 59 );
         assert( next_prime(74) == 79 );
         assert( next_prime(38) == 41 );
-    }
+    }*/
 
 /*----------------------------- Rehash Testing ------------------------------*/ 
     {
@@ -160,7 +153,7 @@ int main()
                 {"Talita", 116, 666, 56789, 5490.f}
             };
 
-        HashTbl< Account::AcctKey, Account > contas(2);
+        HashTable< Account::AcctKey, Account > contas(2);
 
         assert( contas.capacity() == 2 );
         assert( contas.count() == 0 );

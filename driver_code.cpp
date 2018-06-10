@@ -47,7 +47,7 @@ struct Account{
             " >\n\tBank: < "   << _acc.bank_code <<
             " >\n\tBranch: < " << _acc.branch_code <<
             " >\n\tNumber: < " << _acc.acc_number <<
-            " >\n\tBalance: < " << _acc balance << " >\n";
+            " >\n\tBalance: < " << _acc.balance << " >\n";
         return _os;
     }
 };
@@ -90,7 +90,7 @@ int main()
             };
 
         // Hash tablee with capacity = 23
-    	HashTbl< Account::AcctKey, Account > contas(21);
+    	HashTable< Account::AcctKey, Account > contas(21);
 
         assert( contas.capacity() == 23 );
         assert( contas.count() == 0 );
@@ -160,7 +160,7 @@ int main()
                 {"Talita", 116, 666, 56789, 5490.f}
             };
 
-        HashTbl< Account::AcctKey, Account > contas(2);
+        HashTable< Account::AcctKey, Account > contas(2);
 
         assert( contas.capacity() == 2 );
         assert( contas.count() == 0 );
