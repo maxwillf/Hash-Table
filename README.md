@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Implementation of the ** Hash Table ** ADT with tests in an specific application, the data storage of bank's accounts
+Implementation of the **Hash Table** ADT with tests in an specific application, the data storage of bank's accounts
 
 ## TODO
 
