@@ -30,12 +30,9 @@ This project implements the ADT called **hash table**.
 
 ## Git repository
 
-[**github.com/edivaniap/hash_table**](https://github.com/edivaniap/hash_table)
+
 
 
 ## Authorship
-
-Program developed by _Edivânia Pontes de Oliveira_ (< *edivaniap@ufrn.edu.br* >), 2017.1  
-Guided by _Selan R. dos Santos_
 
 &copy; IMD/UFRN 2017

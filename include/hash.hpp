@@ -117,6 +117,10 @@ class HashTable{
 			return currentSize;
 		}
 
+		size_type capacity (void) const{
+			return tablesize;
+		}
+
 		bool remove(const KeyType & key_){
 
 			auto & whichList = Lists[ hashFunc(key_) % tablesize];
@@ -125,12 +129,25 @@ class HashTable{
 		//		std::cout << *i << std::endl;
 				if (true == equalFunc((*i).m_key , key_ )){
 					whichList.erase_after(itr_back);
+					--currentSize;
+
 					return true;
 				}
 				itr_back++;
 			}	
 				return false;
-		}
+		}	
+
+	private:
+
+		std::vector<std::forward_list<HashEntry>> Lists; 
+		
+		size_type currentSize;
+		size_type tablesize;
+	
+		// auxiliary functions
+		KeyHash hashFunc;
+		KeyEqual equalFunc;
 
 		size_type next_prime(size_type number){
 
@@ -140,11 +157,7 @@ class HashTable{
 			return number;
 		}
 		
-		/*! @brief Return the hash capacity */
-		size_t capacity( void ) const{
-			return currentSize;
-		}
-		
+		/*! @brief Return the hash capacity */	
 		void rehash(){
 
 			//std::cout << "calls to rehash " << std::endl;
@@ -161,18 +174,7 @@ class HashTable{
 			for( auto & copyLists : oldLists )
 				for( auto & x : copyLists )
 					insert(x.m_key, x.m_data);
-		}		
-
-	private:
-
-		std::vector<std::forward_list<HashEntry>> Lists; 
-		
-		size_type currentSize;
-		size_type tablesize;
-	
-		// auxiliary functions
-		KeyHash hashFunc;
-		KeyEqual equalFunc;
+		}	
 };
 
 #endif

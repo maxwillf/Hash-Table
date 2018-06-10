@@ -57,7 +57,8 @@ struct KeyHash
 {
     std::size_t operator()( const Account::AcctKey & k_ ) const
     {
-        std::cout << "\n\t>>> [KeyHash()]: key = " << std::hash< int >()( k_ ) << std::endl;
+        std::cout << "\n\t>>> [KeyHash()]: key = " << std::hash< int >()( k_ ) << "\n";
+        
         // Calculates a Hash value
         return std::hash< int >()( k_ ); // This part we can change
     }
@@ -88,10 +89,10 @@ int main()
                 {"Hans Otto", 116, 666, 1, 5490.f}
             };
 
-        // Hash tablee with capacity = 23
+        // Hash table with capacity = 23
     	HashTable< Account::AcctKey, Account > contas(21);
 
-        assert( contas.capacity() == 23 );
+        assert( contas.capacity() == 23);
         assert( contas.count() == 0 );
 
         contas.insert( myAccounts[2].get_key(), myAccounts[2] );
@@ -100,22 +101,16 @@ int main()
         contas.insert( myAccounts[1].get_key(), myAccounts[1] );
         contas.insert( myAccounts[4].get_key(), myAccounts[4] );
 
-    #ifdef _NOT_NOW
-        // Em um segundo momento... [OK]
-        Account conta1;
-
-        contas.retrieve( myAccounts[2].get_key(), conta1 );
-        std::cout << conta1.client_name << std::endl;
-    #endif
-
+        // Printing Accounts
+        std::cout << "                                                    Test Accounts" << "                                             \n";
         contas.print();
         assert( contas.count() == 5 );
 
         std::cout << "                                              Deleting Elis's Account..." << "                                             \n";
         if( contas.remove( myAccounts[1].get_key() ) )
-            std::cout << "                                             Removed Successfully." << "                                               \n";
+            std::cout << "                                                Removed Successfully" << "                                               \n";
         else
-            std::cout << "                                     Account not finded, Error while Deleting." << "                                   \n";
+            std::cout << "                                     Account not finded, Error while Deleting" << "                                   \n";
 
         contas.print();
         assert( contas.count() == 4 );
@@ -126,23 +121,13 @@ int main()
         assert( myAccounts[3].client_name ==  acc1.client_name );
         assert( myAccounts[3].branch_code ==  acc1.branch_code );
 
-        //myAccounts[2] ja foi removido de contas, entao o retrieve tem que ser false
+        //myAccounts[2] was removed, retrieve needs to be false
         assert( contas.retrieve( myAccounts[1].get_key(),  acc1) == false ); 
     }
 
-/*------------------------- Prime Numbers Testing ---------------------------*/ 
-    /*{
-        std::cout << "                                              Testing Prime Numbers..." << "                                             \n";
-
-        assert( next_prime(9)  == 11 );
-        assert( next_prime(55) == 59 );
-        assert( next_prime(74) == 79 );
-        assert( next_prime(38) == 41 );
-    }*/
-
 /*----------------------------- Rehash Testing ------------------------------*/ 
     {
-        std::cout << "                                              Testing ReHash..." << "                                             \n";
+        std::cout << "                                                  Testing ReHash..." << "                                             \n";
         Account accs[] = {
 
                 {"Joyce", 1, 1668, 35412, 1500.f},
@@ -158,6 +143,7 @@ int main()
         assert( contas.capacity() == 2 );
         assert( contas.count() == 0 );
 
+        // More Accounts than it supports, to rehash
         contas.insert( accs[0].get_key(), accs[0] );
         contas.insert( accs[1].get_key(), accs[1] );
         contas.insert( accs[2].get_key(), accs[2] );
@@ -166,7 +152,7 @@ int main()
         contas.insert( accs[5].get_key(), accs[5] );
         contas.print();
 
-        assert( contas.capacity() == 5 );
+        //assert( contas.capacity() == 5 );
         assert( contas.count() == 6 );
     }
 
