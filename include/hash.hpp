@@ -7,6 +7,7 @@
  * @author Max Willian (maxwilliam780@gmail.com)
  * @title The Hash Project
  */
+
 #ifndef _HASH_H_
 #define _HASH_H_
 
@@ -28,35 +29,39 @@ class HashTable{
 
 		public:
 
+			//! @brief HashEntry constructor.
 			HashEntry(KeyType k_, DataType d_):m_key(k_),m_data(d_)
 
 			{/*Empty*/};
 
-			KeyType m_key;
-			//!<Stores the key for an entry.
+			KeyType m_key; //!< Stores the key for an entry.
 
-			DataType m_data;//!<Stores the data for an entry.
+			DataType m_data;//!< Stores the data for an entry.
 	};
 
 	public:
 
 		using Entry = HashEntry;
 
+		//! @brief Hash Table constructor. 
 		HashTable(void): tablesize(101),currentSize(0){ Lists.resize(101);}
 
-
+		//! @brief Table constructor.
 		explicit HashTable(size_type size): tablesize(next_prime(size)), currentSize(0)
 		{Lists.resize(next_prime(size));}
 		
-		void makeEmpty();
-			
+		//void makeEmpty( );
+		
+		/** @brief	Inserts Elements(data_item_) realated to a "key_" on the table.
+		 *	@return True if the insertion was successful; False otherwise.
+		 */ 
 		bool insert(const KeyType & key_ , const DataType & data_item_ ){
 		
-			auto & whichList = Lists[ hashFunc(key_) % tablesize];
-			Entry new_entry (key_, data_item_ );
-			auto itr = whichList.begin();
-			auto itr_b = whichList.before_begin();
-			auto end = whichList.end();
+			auto & whichList = Lists[ hashFunc(key_) % tablesize]; //!< Elements list
+			Entry new_entry (key_, data_item_ ); //!< Take the function parameters as the Hash entry
+			auto itr = whichList.begin(); //!< Iterator to the List's begin
+			auto itr_b = whichList.before_begin(); //!< Iterator to the position before the list's begin 
+			auto end = whichList.end(); //!< Iterator to the list's end
 			for (; itr != end; ++itr) {
 				
 				itr_b++;
@@ -66,7 +71,7 @@ class HashTable{
 			}
 
 			whichList.insert_after(itr_b, new_entry);
-//			whichList.push_front(new_entry);
+			//whichList.push_front(new_entry);
 
 				if(++currentSize > tablesize ) 
 					rehash( );
@@ -74,11 +79,13 @@ class HashTable{
 				return true;
 		}
 
-
+		/** @brief Recovers the information related to the "key_".
+		 *	@rerturn True if it finds the information; False otherwise.
+		 */
 		bool retrieve(const KeyType & key_,  DataType & data_item_) const{
 
 			
-			auto & whichList = Lists[ hashFunc(key_) % tablesize];
+			auto & whichList = Lists[ hashFunc(key_) % tablesize]; //!< Elements list
 			for (auto i = whichList.begin(); i != whichList.end(); ++i) {
 				if (true == equalFunc((*i).m_key , key_)){
 					data_item_ = (*i).m_data;
@@ -89,6 +96,7 @@ class HashTable{
 
 		}
 		
+		//! @brief Prints the Hash Table.
 		void print() const
 		{
 			if(!Lists.empty())
@@ -103,28 +111,34 @@ class HashTable{
 			}
 		}
 
+		//! @brief Clear all the memory related to the lists.
 		void clear(){
 
 			Lists.clear();
 		}
 		
+		//! @return True if the Hash Table is empty; False otherwise.
 		bool empty ( void ) const{
 			return currentSize == 0;
 		}
 
-
+		//! @return The curretn total of elements in the table.
 		size_type count (void) const{
 			return currentSize;
 		}
 
+		//! @return The total of elements a table supports.
 		size_type capacity (void) const{
 			return tablesize;
 		}
 
+		/** @brief Removes an specific element related to the "key_".
+		 *	@return True if the key_ was finded; False otherwise.
+		 */
 		bool remove(const KeyType & key_){
 
-			auto & whichList = Lists[ hashFunc(key_) % tablesize];
-			auto itr_back = whichList.before_begin();
+			auto & whichList = Lists[ hashFunc(key_) % tablesize]; //!<
+			auto itr_back = whichList.before_begin(); //!<
 			for (auto i = whichList.begin(); i != whichList.end(); ++i) {
 		//		std::cout << *i << std::endl;
 				if (true == equalFunc((*i).m_key , key_ )){
@@ -138,17 +152,18 @@ class HashTable{
 				return false;
 		}	
 
-	public:
+	private:
 
-		std::vector<std::forward_list<HashEntry>> Lists; 
+		std::vector<std::forward_list<HashEntry>> Lists; //!< vector  with List of elements (collisions)
 		
-		size_type currentSize;
-		size_type tablesize;
+		size_type currentSize; //!< Total of elements in the table
+		size_type tablesize; //!< Hash table current size
 	
 		// auxiliary functions
-		KeyHash hashFunc;
+		KeyHash hashFunc; 
 		KeyEqual equalFunc;
 
+		//! @brief Helps the rehash finding the next prime number after the table size.
 		size_type next_prime(size_type number){
 
 			for (int i = 2; i < sqrt(number); ++i) {
@@ -157,13 +172,13 @@ class HashTable{
 			return number;
 		}
 		
-		/*! @brief Return the hash capacity */	
+		//! @brief Resizes the Hash Table.	
 		void rehash(){
 
 			//std::cout << "calls to rehash " << std::endl;
 			std::vector<std::forward_list<HashEntry>> oldLists = Lists;
-			// Create new double-sized, empty table
-			tablesize =  next_prime( 2 * tablesize ); 
+			
+			tablesize =  next_prime( 2 * tablesize ); //!< Create new double-sized, empty table 
 			
 			Lists.resize(tablesize) ;
 			currentSize = 0;

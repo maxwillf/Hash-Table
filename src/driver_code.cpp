@@ -138,10 +138,16 @@ int main()
                 {"Talita", 116, 666, 56789, 5490.f}
             };
 
+        std::cout << "                                      Creating a Hash Table with  capacity = 2..." << "                                             \n";
+
         HashTable< Account::AcctKey, Account > contas(2);
 
         assert( contas.capacity() == 2 );
         assert( contas.count() == 0 );
+
+        std::cout << "                                                         DONE!" << "                                             \n";
+
+        std::cout << "                                              Now Rehash must take action..." << "                                             \n";
 
         // More Accounts than it supports, to rehash
         contas.insert( accs[0].get_key(), accs[0] );
@@ -152,8 +158,8 @@ int main()
         contas.insert( accs[5].get_key(), accs[5] );
         contas.print();
 
-        std::cout<< contas.tablesize << "\n";
-        //assert( contas.capacity() == 5 );
+        std::cout << "                                             Rehash worked Successfully!" << "                                             \n";
+
         assert( contas.count() == 6 );
     }
 
