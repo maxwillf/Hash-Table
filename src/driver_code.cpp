@@ -21,8 +21,8 @@ struct Account{
 /*------------------------------ Constructor --------------------------------*/
     
     Account( std::string n_ = "<empty>",
-            int bnc_ = 1,       // Banco do Brasil
-            int brc_ = 1668,    // Campus UFRN agency
+            int bnc_ = 1,       // Banc numeric code
+            int brc_ = 1999,    // Agency
             int nmr_ = 0,       // Account Number
             float bal_ = 0.f )  // Account Balance
         : client_name( n_ ),
@@ -78,15 +78,15 @@ int main()
 {
     {
         //REMAKE
-    	Account acct("Alex Bastos", 1, 1668, 54321, 1500.f);
+    	Account acct("Jack Jhonson", 1, 1999, 44876, 10000.f);
 
     	Account myAccounts[] =
             {
-                {"Carla Bruni", 1, 1668, 54321, 1500.f},
-                {"Elis Regina", 1, 1668, 45794, 530.f},
-                {"Jorge Ben jor", 13, 557, 87629, 150000.f},
-                {"Benito de Paula", 18, 331, 1231, 850.f},
-                {"Hans Otto", 116, 666, 1, 5490.f}
+                {"Carla Bruni", 1, 1999, 44876, 10000.f},
+                {"Elis Regina", 1, 1999, 45794, 0.f},
+                {"Jorge Ben jor", 2, 557, 87629, 1050.f},
+                {"Benito de Paula", 12, 331, 1231, 850.f},
+                {"Hans Otto", 4, 666, 5, 530.f}
             };
 
         // Hash table with capacity = 23
@@ -130,12 +130,12 @@ int main()
         std::cout << "                                                  Testing ReHash..." << "                                             \n";
         Account accs[] = {
 
-                {"Joyce", 1, 1668, 35412, 1500.f},
-                {"Ramon", 1, 1668, 93264, 530.f},
-                {"Elsa", 13, 557, 12745, 150000.f},
-                {"Raquel", 18, 331, 27840, 850.f},
-                {"Miguel", 116, 666, 65423, 5490.f},
-                {"Talita", 116, 666, 56789, 5490.f}
+                {"Joyce", 1, 1999, 35412, 10000.f},
+                {"Ramon", 1, 1999, 63526, 530.f},
+                {"Elsa", 2, 557, 32133, 1000000.f},
+                {"Raquel", 3, 331, 27840, 850.f},
+                {"Miguel", 2, 666, 98766, 5490.f},
+                {"Talita", 5, 666, 99999, 5490.f}
             };
 
         std::cout << "                                      Creating a Hash Table with  capacity = 2..." << "                                             \n";
