@@ -2,11 +2,11 @@
 
 ## Introduction
 
-This project implements the ADT called **hash table**.
+Implementation of the **Hash Table** ADT with tests in an specific application, the data storage of bank's accounts
 
 ## TODO
 
-**Class HashTbl**  
+**Hash Table**  
 
 - [x] _**HashTable**_ : Constructs the table with logical size setted
 - [x] _**~HashTable**_ : Table destructor
