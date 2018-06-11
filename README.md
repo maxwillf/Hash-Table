@@ -2,14 +2,13 @@
 
 ## Introduction
 
-Implementation of the **Hash Table** ADT with tests in an specific application, the data storage of bank's accounts
+Implementation of the **Hash Table** ADT with tests in an specific application, the data storage of bank's accounts.
 
 ## TODO
 
 **Hash Table**  
 
 - [x] _**HashTable**_ : Constructs the table with logical size setted
-- [x] _**~HashTable**_ : Table destructor
 - [x] _**insert**_ : Adds new element to the table
 - [x] _**retrieve**_ : Retrieves a data associated with a key
 - [x] _**print**_ : Shows the table
@@ -26,7 +25,7 @@ Implementation of the **Hash Table** ADT with tests in an specific application, 
 	a) For compiling, use:
 	`$ make`
 	b) For running, use:
-	`$ ./bin/accounts
+	`$ ./bin/hash
 
 
 ## Git repository
