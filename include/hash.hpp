@@ -114,7 +114,11 @@ class HashTable{
 		//! @brief Clear all the memory related to the lists.
 		void clear(){
 
-			Lists.clear();
+			for(auto l : Lists){
+
+				l.clear();
+			}
+
 		}
 		
 		//! @return True if the Hash Table is empty; False otherwise.

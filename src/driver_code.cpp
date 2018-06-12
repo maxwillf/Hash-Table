@@ -172,7 +172,7 @@ int main()
         std::cout << "                                             Rehash worked Successfully!" << "                                             \n";
 
         assert( contas.count() == 6 );
-    }
+	}
 
     std::cout << "\n\n>>> Exiting Successfully...\n";
 	return EXIT_SUCCESS;

@@ -25,7 +25,7 @@ Implementation of the **Hash Table** ADT with tests in an specific application, 
 	a) For compiling, use:
 	`$ make`
 	b) For running, use:
-	`$ ./bin/hash
+	`$ ./hash_driver
 
 
 ## Git repository
