@@ -52,8 +52,8 @@ class HashTable{
 		
 		//void makeEmpty( );
 		
-		/** @brief	Inserts Elements(data_item_) realated to a "key_" on the table.
-		 *	@return True if the insertion was successful; False otherwise.
+		/** @brief Inserts Elements(data_item_) realated to a "key_" on the table.
+		 *  @return True if the insertion was successful; False otherwise.
 		 */ 
 		bool insert(const KeyType & key_ , const DataType & data_item_ ){
 		
@@ -80,7 +80,7 @@ class HashTable{
 		}
 
 		/** @brief Recovers the information related to the "key_".
-		 *	@rerturn True if it finds the information; False otherwise.
+		 *  @rerturn True if it finds the information; False otherwise.
 		 */
 		bool retrieve(const KeyType & key_,  DataType & data_item_) const{
 
@@ -133,7 +133,7 @@ class HashTable{
 		}
 
 		/** @brief Removes an specific element related to the "key_".
-		 *	@return True if the key_ was finded; False otherwise.
+		 *  @return True if the key_ was finded; False otherwise.
 		 */
 		bool remove(const KeyType & key_){
 
