@@ -104,12 +104,12 @@ class HashTable{
 				for (auto Lists_iter = Lists.begin(); Lists_iter != Lists.end(); ++Lists_iter) {
 					if(!(*Lists_iter ).empty())
 					for (auto j = (*Lists_iter ).begin(); j != (*Lists_iter ).end(); ++j) {
-						std::cout << "Key: " << (*j).m_key <<" Data: " << (*j).m_data<< std::endl;
+						std::cout << (*j).m_data;
 					}
 				}
 
 			}
-		}
+		} 
 
 		//! @brief Clear all the memory related to the lists.
 		void clear(){

@@ -8,8 +8,8 @@
 //! Accounts definition
 struct Account{
 
-    typedef int AcctKey;
-
+   // typedef int AcctKey;
+	using AcctKey = std::tuple < std::string, int , int , int > ;
 /*-------------------------------- Public -----------------------------------*/
     
     std::string client_name;
@@ -37,8 +37,8 @@ struct Account{
     //! @brief Returns the key related to the account
     AcctKey get_key()
     {
-        return acc_number;
-    }
+        return std::make_tuple(client_name,bank_code,branch_code, acc_number);
+    } 
 
     //! @brief Prints an account 
     inline friend std::ostream &operator<< ( std::ostream & _os, const Account & _acc )
@@ -57,10 +57,17 @@ struct KeyHash
 {
     std::size_t operator()( const Account::AcctKey & k_ ) const
     {
-        std::cout << "\n\t>>> [KeyHash()]: key = " << std::hash< int >()( k_ ) << "\n";
+       // std::cout << "\n\t>>> [KeyHash()]: key = " << std::hash< int >()( k_.acc_number ) << "\n";
         
         // Calculates a Hash value
-        return std::hash< int >()( k_ ); // This part we can change
+        int ret_value =  std::hash< int >()( std::get<1>(k_)); // This part we can change
+		for( ch : std::get<0>(k_)){
+			ret_value += ch;
+		}
+		ret_value += std::hash< int > () (std::get<2>(k_));
+		ret_value += std::hash< int > () (std::get<3>(k_));
+		
+			return ret_value;
     }
 };
 
@@ -69,7 +76,11 @@ struct KeyEqual
 {
 	bool operator()( const Account::AcctKey & _lhs, const Account::AcctKey & _rhs ) const
 	{
-		return ( _lhs == _rhs );
+		return  ( std::get<1>(_lhs)== std::get<1>(_rhs))
+			and (std::get<2>(_lhs) == std::get<2>(_rhs) )
+			and (std::get<3>(_lhs) == std::get<3>(_rhs) )
+			and (std::get<0>(_lhs) == std::get<0>(_rhs) );
+			
 	}
 };
 
@@ -90,7 +101,7 @@ int main()
             };
 
         // Hash table with capacity = 23
-    	HashTable< Account::AcctKey, Account > contas(21);
+    	HashTable< Account::AcctKey, Account, KeyHash, KeyEqual > contas(21);
 
         assert( contas.capacity() == 23);
         assert( contas.count() == 0 );
@@ -140,7 +151,7 @@ int main()
 
         std::cout << "                                      Creating a Hash Table with  capacity = 2..." << "                                             \n";
 
-        HashTable< Account::AcctKey, Account > contas(2);
+        HashTable< Account::AcctKey, Account, KeyHash, KeyEqual > contas(2);
 
         assert( contas.capacity() == 2 );
         assert( contas.count() == 0 );
