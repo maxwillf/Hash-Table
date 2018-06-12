@@ -80,7 +80,7 @@ class HashTable{
 		}
 
 		/** @brief Recovers the information related to the "key_".
-		 *  @rerturn True if it finds the information; False otherwise.
+		 *  @return True if it finds the information; False otherwise.
 		 */
 		bool retrieve(const KeyType & key_,  DataType & data_item_) const{
 
