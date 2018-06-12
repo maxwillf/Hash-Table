@@ -133,7 +133,7 @@ class HashTable{
 		}
 
 		/** @brief Removes an specific element related to the "key_".
-		 *  @return True if the key_ was finded; False otherwise.
+		 *  @return True if the key_ was found; False otherwise.
 		 */
 		bool remove(const KeyType & key_){
 
