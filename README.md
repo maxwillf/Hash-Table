@@ -36,4 +36,4 @@ Implementation of the **Hash Table** ADT with tests in an specific application, 
 
 Program developed by Max Willian (maxwilliam780@gmail.com) and Oziel Alves (ozielalves@ufrn.edu.br), 2018.1
 
-&copy; IMD/UFRN 2017
+&copy; IMD/UFRN 2018
