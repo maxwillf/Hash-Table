@@ -61,7 +61,7 @@ struct KeyHash
         
         // Calculates a Hash value
         int ret_value =  std::hash< int >()( std::get<1>(k_)); // This part we can change
-		for( ch : std::get<0>(k_)){
+		for(char ch : std::get<0>(k_)){
 			ret_value += ch;
 		}
 		ret_value += std::hash< int > () (std::get<2>(k_));
