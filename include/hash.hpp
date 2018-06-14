@@ -170,7 +170,7 @@ class HashTable{
 		//! @brief Helps the rehash finding the next prime number after the table size.
 		size_type next_prime(size_type number){
 
-			for (int i = 2; i < sqrt(number); ++i) {
+			for (int i = 2; i <= sqrt(number); ++i) {
 				if(number % i == 0) return next_prime(number+1);
 			}
 			return number;
