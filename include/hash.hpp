@@ -114,7 +114,7 @@ class HashTable{
 		//! @brief Clear all the memory related to the lists.
 		void clear(){
 
-			for(auto l : Lists){
+			for(auto & l : Lists){
 
 				l.clear();
 			}
